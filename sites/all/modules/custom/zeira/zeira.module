@@ -1,0 +1,153 @@
+<?php
+
+/*
+* Implements hook_menu().
+*/
+function zeira_menu() {
+
+	$items = array();
+
+	$items['zeira/user'] = array(
+		'title' => 'user form',
+		'description' => 'form to store user details',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('zeira_ex_form'),
+		'access callback' => TRUE
+	);
+
+	return $items;
+}
+
+/*
+*	Implements hook_form().
+*/
+function zeira_ex_form($form, &$form_state){
+
+	$today = date('Y-m-d');
+	$gender = array(0 => t('male'), 1 => t('female'));
+	$bands = array('Metallica' => t('Metallica'), 
+		'GNR' => t('Guns and roses'), 
+		'Beatels' => t('Beatels'), 
+		'Apocalyptic_love' => t('Apocalyptic love'),
+		'Pink_floyd' => t('Pink floyd'));
+
+	$form['name'] = array(
+
+		'#type' => 'textfield',
+		'#title' => t('Enter full name:'),
+		'#maxlength' => 40,
+		'#required' => True
+	);
+
+	$form['email'] = array(
+
+		'#type' => 'textfield',
+		'#title' => t('Enter email-id:'),
+		'#required' => True
+	);
+
+	$form['password'] = array(
+		'#type' => 'password',
+		'#title' => t('Password'),
+		'#maxlength' => 20,
+		'#required' => True
+	);
+
+	$form['password'] = array(
+		'#type' => 'password_confirm',
+		'#required' => True
+	);
+
+	$form['gender'] = array(
+		'#type' => 'radios',
+		'#title' => t('Gender:'),
+		'#default_value' => isset($node->gender) ? $node->gender : 0,
+		'#options' => $gender,
+		
+	);
+
+	$form['address'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Address: '),
+		'#resizable' => FALSE
+		);
+
+	$form['music'] = array(
+		'#type' => 'select',
+		'#title' => 'Do you like music?',
+		'#options' => array(0 => t('Yes'), 1 => t('No')),
+		
+	);
+
+	$form['fav_bands'] = array(
+		'#title' => t('Choose favourite bands'),
+		'#type' => 'checkboxes',
+		'#options' => $bands
+	);
+
+	$form['submit_button'] = array(
+		'#type' => 'submit',
+		'#value' => 'sumbit'
+	); 
+
+	return $form;
+}
+
+/*
+*	Implements hook_form_submit().
+*/
+function zeira_ex_form_submit($form, &$form_state)
+{
+	print "Form contents";
+	$name = $form_state['values']['name'];
+	$email = $form_state['values']['email'];
+	$pass = $form_state['values']['password'];
+	//$gender = $form_state['value']['gender'];
+	$address = $form_state['values']['address'];
+	//$music = $form_state['value']['music'];
+
+	db_insert('user_info')->fields(array(
+		'name' => $name,
+		'email' => $email,
+		'password' => $pass,
+		'address' => $address,
+	))
+	->execute();
+
+	
+}
+
+/*
+*	Implements hook_form_validate().
+*/
+function zeira_ex_form_validate($form, &$form_state)
+{
+	/*$name = $form_state['values']['name'];
+	$email = $form_state['values']['email'];
+	if(1 === preg_match("~[0-9]~", $name))
+	{
+		form_set_error('name', 'Name cannot contain digits');
+	}
+
+	if(1 === preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/', $email));
+	{
+		form_set_error('email', 'Invalid email format');
+	}*/
+}
+
+/*
+*	Implemets hook_form_alter().
+*/
+function zeira_ex_form_alter(&$form, &$form_state, $form_id) {
+
+  if (isset($form['type']) && $form['type']['#value'] . '_node_settings' == $form_id) {
+    $form['workflow']['upload_' . $form['type']['#value']] = array(
+      '#type' => 'radios',
+      '#title' => t('Attachments'),
+      '#default_value' => variable_get('upload_' . $form['type']['#value'], 1),
+      '#options' => array(t('Disabled'), t('Enabled')),
+    );
+  }
+}
+
+?>

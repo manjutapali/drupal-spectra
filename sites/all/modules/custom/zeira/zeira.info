@@ -1,0 +1,4 @@
+name = zeira
+description = simple form for practice
+core = 7.x
+files = zeira.module

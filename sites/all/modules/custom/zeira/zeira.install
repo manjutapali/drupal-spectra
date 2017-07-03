@@ -1,0 +1,111 @@
+<?php
+	
+/*
+*	Implements hook_schema().
+*/
+function zeira_schema(){
+
+	$schema['user_info'] = array(
+		'description' => 'user information',
+		'fields' => array(
+			'user_id' => array(
+				'description' => 'Primary identifier for the user',
+				'type' => 'serial',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+				),
+			'name' => array(
+				'description' => 'user name',
+				'type' => 'varchar',
+				'length' => 30,
+				'not null' => TRUE
+				),
+			'email' => array(
+				'description' => 'user email id',
+				'type' => 'varchar',
+				'length' => 40,
+				'not null' => TRUE
+				),
+			'password' => array(
+				'description' => 'user password',
+				'type' => 'varchar',
+				'length' => 20,
+				'not null' => TRUE
+				),
+			'gender' => array(
+				'description' => 'user gender',
+				'type' => 'varchar',
+				'length' => 6,
+				),
+			'address' => array(
+				'description' => 'user address',
+				'type' => 'varchar',
+				'length' => 250,
+				),
+			'music' => array(
+				'description' => 'does user like music',
+				'type' => 'varchar',
+				'length' => 3,
+				)
+			),
+    	'primary key' => array('user_id'),
+			
+		);
+	return $schema;
+}
+
+/*
+* Implements hook_update().
+*/
+function zeira_update_7001()
+{
+	$schema['user_info'] = array(
+    'description' => 'user information',
+    'fields' => array(
+      'user_id' => array(
+        'description' => 'Primary identifier for the user',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'name' => array(
+        'description' => 'user name',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE
+      ),
+      'email' => array(
+        'description' => 'user email id',
+        'type' => 'varchar',
+        'length' => 40,
+        'not null' => TRUE
+      ),
+      'password' => array(
+        'description' => 'user password',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE
+      ),
+      'gender' => array(
+        'description' => 'user gender',
+        'type' => 'varchar',
+        'length' => 6,
+      ),
+      'address' => array(
+        'description' => 'user address',
+        'type' => 'varchar',
+        'length' => 250,
+      ),
+      'music' => array(
+        'description' => 'does user like music',
+        'type' => 'varchar',
+        'length' => 3,
+      )
+    ),
+    'primary key' => array('user_id'),
+
+  );
+  db_create_table('user_info', $schema['user_info']);
+}
+
+?>
