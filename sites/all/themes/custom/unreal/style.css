@@ -1,0 +1,131 @@
+#header-aside {
+
+}
+
+body{
+	margin: 0;
+}
+
+.header-div {
+	background: #00b3b3;
+	color:white;
+	padding: 1%;
+	font-size: 18px;
+}
+
+.header-div a {
+	text-decoration: none;
+	color: white;
+	font-size: 24px;
+	font-family: cursive;
+}
+
+.nav-bar {
+	background: black;
+	padding: 1%;
+}
+
+.nav-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-menu ul li {
+	display: inline;
+}
+
+.nav-menu a {
+	text-decoration: none;
+	color: white;
+}
+
+.nav-menu a.active {
+	color: #00b3b3;
+}
+
+.sidebar-container {
+	width: 20%;
+	padding: 1%;
+	margin-top: 10px;
+	background: #e6ffff;
+	display: inline-block;
+	float: left;
+}
+
+.sidebar-container h2 {
+	display: none;
+}
+
+.sidebar-container a {
+	text-decoration: none;
+	color: black;
+	padding: 2px;
+	
+}
+
+.sidebar-container a:hover {
+	color: #00b3b3;
+}
+
+.sidebar-container ul {
+	list-style: none;
+	margin: -7px;
+}
+
+.sidebar-container ul li {
+	margin: 6px;
+
+}
+
+.content-main {
+	width: 50%;
+	display: inline-block;
+	float: left;
+	margin-left: 20px;
+}
+
+.content-main h2 a {
+	text-decoration: none;
+	color: black
+}
+
+.content-main h2 a:hover {
+	text-decoration: underline;
+	color: #00b3b3;
+}
+
+.content-main ul li a {
+	text-decoration: none;
+	color: #00b3b3;
+}
+
+.content-main ul li a:hover {
+	text-decoration: underline;
+}
+
+.content-main .item-list ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+.content-main .item-list ul li a:hover {
+	text-decoration: underline;
+	color: #00b3b3;
+}
+
+.node {
+	margin-bottom: 50px;
+}
+
+.advbar {
+	display: inline-block;
+	background: #e6ffff;
+	float: left;
+	padding: 20px;
+	margin: 10px;
+}
+.footer {
+	display: block;
+	float: left;
+}
